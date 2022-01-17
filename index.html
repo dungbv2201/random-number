@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+		}
+		.container{
+			width: 80%;
+			margin: 20px auto;
+		}
+		.d-flex{
+			display: flex;
+		}
+		.col{
+			width: calc(100% / 5);
+			text-align: center;
+		}
+		#btn-random{
+			border: 0;
+			outline: none;
+			padding: 5px 10px;
+			background: #00bcd4;
+			cursor: pointer;
+			border-radius: 4px;
+			margin-bottom: 20px;
+			
+		}
+		#btn-random:hover{
+			color: #fff;
+		}
+		.col:not(:last-child){
+			border-right: 1px solid;
+		}
+		.number{
+			width: 80px;
+			padding: 5px 10px;
+			background: #00bcd4;
+			margin: 5px auto;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<button id="btn-random">Random</button>
+	<div class="d-flex">
+		<div class="col col-1">
+			<strong>Column 1</strong>
+			<div class="row-number"></div>
+		</div>
+		<div class="col col-2">
+			<strong>Column 2</strong>
+			<div class="row-number"></div>
+		</div>
+		<div class="col col-3">
+			<strong>Column 3</strong>
+			<div class="row-number"></div>
+		</div>
+		<div class="col col-4">
+			<strong>Column 4</strong>
+			<div class="row-number"></div>
+		</div>
+		<div class="col col-5">
+			<strong>Column 5</strong>
+			<div class="row-number"></div>
+		</div>
+	</div>
+</div>
+<script>
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+	
+	function calcCol(){
+		const arrayCol = [getRandomInt(15,23), getRandomInt(15,23),getRandomInt(15,23), getRandomInt(15,23)];
+		arrayCol[4] = 100 - arrayCol.reduce((item, curr) => item + curr,0);
+		let numbers = Array.from({length: 100}, (v, i) => i);
+		const cols = [];
+		arrayCol.forEach(function(item, index){
+			cols[index] =[]
+			for(let i = 0;i< item; i++){
+				let idex = getRandomInt(0,99);
+				while (numbers[idex] === undefined){
+					idex = getRandomInt(0,99);
+				}
+				const data = numbers[idex];
+				numbers.splice(idex,1);
+				cols[index].push(data);
+			}
+		});
+		return cols;
+	}
+	
+	function render(){
+		const data = calcCol();
+		data.forEach(function(item, index){
+			let content = '';
+			item.forEach(function(i,idx){
+				content +=`<div class="number"><strong>${i}</strong></div>`
+			})
+			content += `<div class="number"><strong>Total Numner: ${item.length}</strong></div>`;
+			document.querySelector(`.col-${index+1} .row-number`).innerHTML = content;
+		})
+	}
+	render();
+	document.querySelector('#btn-random').addEventListener('click',function (){
+		render();
+	})
+</script>
+</body>
+</html>
