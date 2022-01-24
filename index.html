@@ -23,77 +23,83 @@
 </head>
 <body>
 <div class="container" id="app">
-	<div class="columns is-mobile">
-		<div class="column is-3">
-			<form-input name="Cột 1" v-model.lazy="cols.col1" :key="`number1`+key"></form-input>
-			<form-input name="Cột 2" v-model="cols.col2" :key="`number2`+key"></form-input>
-		</div>
-		<div class="column is-3">
-			<form-input name="Cột 3" v-model="cols.col3" :key="`number3`+key"></form-input>
-			<form-input name="Cột 4" v-model="cols.col4" :key="`number4`+key"></form-input>
-		</div>
-		<div class="column is-3">
-			<form-input name="Cột 5" v-model="cols.col5" :key="`number5`+key"></form-input>
-			<div class="field is-horizontal">
-				<div class="field-label is-normal mr-5">
-					<label class="label" style="width: 70px">Tổng số:</label>
-				</div>
-				<div class="field-body">
-					<div class="field">
-						<p class="control">
-							<input class="input" type="number" :value="total" width="60px" readonly disabled/>
-						</p>
+	<template v-if="!isLogined">
+		<input type="text" v-model="name">
+		<button class="btn" @click="submit">submit</button>
+	</template>
+	<template v-else>
+		<div class="columns is-mobile" >
+			<div class="column is-3">
+				<form-input name="Cột 1" v-model.lazy="cols.col1" :key="`number1`+key"></form-input>
+				<form-input name="Cột 2" v-model="cols.col2" :key="`number2`+key"></form-input>
+			</div>
+			<div class="column is-3">
+				<form-input name="Cột 3" v-model="cols.col3" :key="`number3`+key"></form-input>
+				<form-input name="Cột 4" v-model="cols.col4" :key="`number4`+key"></form-input>
+			</div>
+			<div class="column is-3">
+				<form-input name="Cột 5" v-model="cols.col5" :key="`number5`+key"></form-input>
+				<div class="field is-horizontal">
+					<div class="field-label is-normal mr-5">
+						<label class="label" style="width: 70px">Tổng số:</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control">
+								<input class="input" type="number" :value="total" width="60px" readonly disabled/>
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="columns is-mobile" style="padding-left:12px;">
-		<button class="button is-primary mr-3" :disabled="invalidButton" @click="randomNumber">Random</button>
-		<button class="button is-warning" @click="clearForm">Clear</button>
-	</div>
-	<div class="columns" v-if="number1.length > 0">
-		<div class="column">
-			<div class="card text-center" style="text-align:center;padding: 10px 0">
-				<h3 class="text-center"><strong>Cột 1</strong></h3>
-				<div class="card-content">
-					<div v-for="item of number1" class="item">{{ item }}</div>
+		<div class="columns is-mobile" style="padding-left:12px;">
+			<button class="button is-primary mr-3" :disabled="invalidButton" @click="randomNumber">Random</button>
+			<button class="button is-warning" @click="clearForm">Clear</button>
+		</div>
+		<div class="columns" v-if="number1.length > 0">
+			<div class="column">
+				<div class="card text-center" style="text-align:center;padding: 10px 0">
+					<h3 class="text-center"><strong>SĐ</strong></h3>
+					<div class="card-content">
+						<div v-for="item of number1" class="item">{{ item }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="card text-center" style="text-align:center;padding: 10px 0">
+					<h3 class="text-center"><strong>VB</strong></h3>
+					<div class="card-content">
+						<div v-for="item of number2" class="item">{{ item }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="card text-center" style="text-align:center;padding: 10px 0">
+					<h3 class="text-center"><strong>QH</strong></h3>
+					<div class="card-content">
+						<div v-for="item of number3" class="item">{{ item }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="card text-center" style="text-align:center;padding: 10px 0">
+					<h3 class="text-center"><strong>HR</strong></h3>
+					<div class="card-content">
+						<div v-for="item of number4" class="item">{{ item }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="card text-center" style="text-align:center;padding: 10px 0">
+					<h3 class="text-center"><strong>VZ</strong></h3>
+					<div class="card-content">
+						<div v-for="item of number5" class="item">{{ item }}</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="column">
-			<div class="card text-center" style="text-align:center;padding: 10px 0">
-				<h3 class="text-center"><strong>Cột 2</strong></h3>
-				<div class="card-content">
-					<div v-for="item of number2" class="item">{{ item }}</div>
-				</div>
-			</div>
-		</div>
-		<div class="column">
-			<div class="card text-center" style="text-align:center;padding: 10px 0">
-				<h3 class="text-center"><strong>Cột 3</strong></h3>
-				<div class="card-content">
-					<div v-for="item of number3" class="item">{{ item }}</div>
-				</div>
-			</div>
-		</div>
-		<div class="column">
-			<div class="card text-center" style="text-align:center;padding: 10px 0">
-				<h3 class="text-center"><strong>Cột 4</strong></h3>
-				<div class="card-content">
-					<div v-for="item of number4" class="item">{{ item }}</div>
-				</div>
-			</div>
-		</div>
-		<div class="column">
-			<div class="card text-center" style="text-align:center;padding: 10px 0">
-				<h3 class="text-center"><strong>Cột 5</strong></h3>
-				<div class="card-content">
-					<div v-for="item of number5" class="item">{{ item }}</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	</template>
 </div>
 
 <script type="text/x-template" id="basic-input">
@@ -148,9 +154,14 @@
 				number4: [],
 				number5: [],
 				key:1,
+				isLogined: false,
+				name:''
 			}
 		},
 		created(){
+			if(isLogined){
+				document.getElementById('app').innerHTML = ``
+			}
 		},
 		watch: {
 			cols: {
@@ -213,6 +224,11 @@
 				this.number3 = [];
 				this.number4 = [];
 				this.number5 = [];
+			},
+			submit(){
+				if(this.name === 'Admin@0987'){
+					this.isLogined = true;
+				}
 			}
 		}
 	}).$mount('#app');
