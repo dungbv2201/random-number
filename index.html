@@ -30,15 +30,15 @@
 	<template v-else>
 		<div class="columns is-mobile" >
 			<div class="column is-3">
-				<form-input name="Cột 1" v-model.lazy="cols.col1" :key="`number1`+key"></form-input>
-				<form-input name="Cột 2" v-model="cols.col2" :key="`number2`+key"></form-input>
+				<form-input name="SĐ" v-model.lazy="cols.col1" :key="`number1`+key"></form-input>
+				<form-input name="VB" v-model="cols.col2" :key="`number2`+key"></form-input>
 			</div>
 			<div class="column is-3">
-				<form-input name="Cột 3" v-model="cols.col3" :key="`number3`+key"></form-input>
-				<form-input name="Cột 4" v-model="cols.col4" :key="`number4`+key"></form-input>
+				<form-input name="QH" v-model="cols.col3" :key="`number3`+key"></form-input>
+				<form-input name="HR" v-model="cols.col4" :key="`number4`+key"></form-input>
 			</div>
 			<div class="column is-3">
-				<form-input name="Cột 5" v-model="cols.col5" :key="`number5`+key"></form-input>
+				<form-input name="VZ" v-model="cols.col5" :key="`number5`+key"></form-input>
 				<div class="field is-horizontal">
 					<div class="field-label is-normal mr-5">
 						<label class="label" style="width: 70px">Tổng số:</label>
@@ -62,7 +62,7 @@
 				<div class="card text-center" style="text-align:center;padding: 10px 0">
 					<h3 class="text-center"><strong>SĐ</strong></h3>
 					<div class="card-content">
-						<div v-for="item of number1" class="item">{{ item }}</div>
+						<div class="item">{{ number1.map(item => item).join(' ') }}</div>
 					</div>
 				</div>
 			</div>
@@ -70,7 +70,7 @@
 				<div class="card text-center" style="text-align:center;padding: 10px 0">
 					<h3 class="text-center"><strong>VB</strong></h3>
 					<div class="card-content">
-						<div v-for="item of number2" class="item">{{ item }}</div>
+						<div class="item">{{ number2.map(item => item).join(' ') }}</div>
 					</div>
 				</div>
 			</div>
@@ -78,7 +78,7 @@
 				<div class="card text-center" style="text-align:center;padding: 10px 0">
 					<h3 class="text-center"><strong>QH</strong></h3>
 					<div class="card-content">
-						<div v-for="item of number3" class="item">{{ item }}</div>
+						<div class="item">{{ number3.map(item => item).join(' ') }}</div>
 					</div>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 				<div class="card text-center" style="text-align:center;padding: 10px 0">
 					<h3 class="text-center"><strong>HR</strong></h3>
 					<div class="card-content">
-						<div v-for="item of number4" class="item">{{ item }}</div>
+						<div class="item">{{ number4.map(item => item).join(' ') }}</div>
 					</div>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 				<div class="card text-center" style="text-align:center;padding: 10px 0">
 					<h3 class="text-center"><strong>VZ</strong></h3>
 					<div class="card-content">
-						<div v-for="item of number5" class="item">{{ item }}</div>
+						<div class="item">{{ number5.map(item => item).join(' ') }}</div>
 					</div>
 				</div>
 			</div>
